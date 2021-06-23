@@ -60,6 +60,7 @@ g.selectAll('text')
   .attr('x', (d, i) =>  i * BAR_WIDTH + BAR_WIDTH / 2)
   .attr('y', BAR_HEIGHT + MARGIN_BOTTOM / 2)
   .attr('text-anchor', 'middle')
+  .attr("font-family", "Arial")
 
 const axisY = axisLeft().scale(yScale)
   .tickFormat(d => `${d / 1000}k`)
@@ -92,9 +93,22 @@ const creationDate = select("#numbers")
   .append("svg");
   
 let date = creationDate.append("text")
-  .attr("x", 50)
-  .attr("y", 50)
+  .attr("x", "50%")
+  .attr("y", "30%")
+  .attr("dominant-baseline", "middle")
+  .attr("text-anchor", "middle")
+  .attr("font-size", "4em")
+  .attr("font-family", "Arial")
   .text(1);
+
+  let name = creationDate.append("text")
+  .attr("x", "50%")
+  .attr("y", "70%")
+  .attr("dominant-baseline", "middle")
+  .attr("text-anchor", "middle")
+  .attr("font-size", "2em")
+  .attr("font-family", "Arial")
+  .text("Création de SpaceX");
   
   date.transition()
   .tween("text", function() {
@@ -112,9 +126,22 @@ const rockets = select("#numbers")
   .append("svg");
   
 let count = rockets.append("text")
-  .attr("x", 50)
-  .attr("y", 50)
+  .attr("x", "50%")
+  .attr("y", "30%")
+  .attr("dominant-baseline", "middle")
+  .attr("text-anchor", "middle")
+  .attr("font-size", "4em")
+  .attr("font-family", "Arial")
   .text(1);
+
+let label = rockets.append("text")
+  .attr("x", "50%")
+  .attr("y", "70%")
+  .attr("dominant-baseline", "middle")
+  .attr("text-anchor", "middle")
+  .attr("font-size", "2em")
+  .attr("font-family", "Arial")
+  .text("Modèles de fusées");
   
 count.transition()
   .tween("text", function() {
@@ -134,15 +161,28 @@ const launches = select("#numbers")
   .append("svg");
   
 let total = launches.append("text")
-  .attr("x", 50)
-  .attr("y", 50)
+  .attr("x", "50%")
+  .attr("y", "30%")
+  .attr("dominant-baseline", "middle")
+  .attr("text-anchor", "middle")
+  .attr("font-size", "4em")
+  .attr("font-family", "Arial")
   .text(1);
+
+  let description = launches.append("text")
+  .attr("x", "50%")
+  .attr("y", "70%")
+  .attr("dominant-baseline", "middle")
+  .attr("text-anchor", "middle")
+  .attr("font-size", "2em")
+  .attr("font-family", "Arial")
+  .text("Décollages réussis");
   
   total.transition()
   .tween("text", function() {
      let selection = select(this);    // selection of node being transitioned
      let start = 0; // start value prior to transition
-     let end = 121;                     // specified end value
+     let end = 116;                     // specified end value
      let interpolator = interpolateNumber(start,end); // d3 interpolator
 
      return function(t) { selection.text(Math.round(interpolator(t))); };  // return value

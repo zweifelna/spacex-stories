@@ -7,3 +7,9 @@ body{
 text{
     fill: white;
 }
+
+#numbers {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
