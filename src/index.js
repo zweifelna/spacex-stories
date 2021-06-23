@@ -3,6 +3,8 @@ import {
   select,
   scaleLinear,
   max,
+  interpolateRound,
+  interpolateNumber,
 } from 'd3'
 
 const DATA = [
@@ -95,4 +97,68 @@ const test = select('#fusees2')
     test.transition()
     .duration(2000)
     .attr("fill", "blue");
+
+    /******************************** */
+
+const creationDate = select("#numbers")
+  .append("svg");
+  
+let date = creationDate.append("text")
+  .attr("x", 50)
+  .attr("y", 50)
+  .text(1);
+  
+  date.transition()
+  .tween("text", function() {
+     let selection = select(this);    // selection of node being transitioned
+     let start = 2002; // start value prior to transition
+     let end = 2002;                     // specified end value
+     let interpolator = interpolateNumber(start,end); // d3 interpolator
+
+     return function(t) { selection.text(Math.round(interpolator(t))); };  // return value
+     
+  })
+  .duration(2500);
+
+const rockets = select("#numbers")
+  .append("svg");
+  
+let count = rockets.append("text")
+  .attr("x", 50)
+  .attr("y", 50)
+  .text(1);
+  
+count.transition()
+  .tween("text", function() {
+     let selection = select(this);    // selection of node being transitioned
+     let start = 0; // start value prior to transition
+     let end = 4;                     // specified end value
+     let interpolator = interpolateNumber(start,end); // d3 interpolator
+
+     return function(t) { selection.text(Math.round(interpolator(t))); };  // return value
+     
+  })
+  .duration(2500);
+
+
+
+const launches = select("#numbers")
+  .append("svg");
+  
+let total = launches.append("text")
+  .attr("x", 50)
+  .attr("y", 50)
+  .text(1);
+  
+  total.transition()
+  .tween("text", function() {
+     let selection = select(this);    // selection of node being transitioned
+     let start = 0; // start value prior to transition
+     let end = 121;                     // specified end value
+     let interpolator = interpolateNumber(start,end); // d3 interpolator
+
+     return function(t) { selection.text(Math.round(interpolator(t))); };  // return value
+     
+  })
+  .duration(2500);
 
