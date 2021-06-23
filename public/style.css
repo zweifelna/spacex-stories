@@ -1,6 +1,7 @@
 body{
     background-image: url(/img/Walppaper_SapceX.svg);
     background-size: contain;
+<<<<<<< HEAD
 }
 
 * {
@@ -15,4 +16,17 @@ body{
     margin-left:auto;
     margin-right:auto;
     display:block;
+=======
+    color: white;
+}
+
+text{
+    fill: white;
+}
+
+#numbers {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+>>>>>>> 46df40d32aa94d6233b388960aff596ddfdf6832
 }
