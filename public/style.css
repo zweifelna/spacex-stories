@@ -1,4 +1,9 @@
 body{
     background-image: url(/img/bg-stars-2560.jpg);
     background-size: contain;
+    color: white;
+}
+
+text{
+    fill: white;
 }

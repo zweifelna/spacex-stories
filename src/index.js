@@ -87,18 +87,6 @@ imagesG.selectAll('svg')
 
 /******************************************/
 
-const test = select('#fusees2')
-    .append("circle")
-    .attr("cx",150)
-    .attr("cy",50)
-    .attr("r",30)
-    .attr("fill", "red");
-    
-    test.transition()
-    .duration(2000)
-    .attr("fill", "blue");
-
-    /******************************** */
 
 const creationDate = select("#numbers")
   .append("svg");
