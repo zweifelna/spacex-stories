@@ -220,8 +220,8 @@ let total = launches.append("text")
   
   const color = ({ data }) => {
     switch (data.status) {
-      case 'Success': return 'limegreen'
-      case 'Unsuccess': return 'red'
+      case 'Success': return '#2a507d'
+      case 'Unsuccess': return 'white'
       default: return 'black'
     }
   }
