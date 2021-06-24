@@ -8,14 +8,14 @@ import {
   pie
 } from 'd3'
 
+// import jq from 'node-jq';
+
+
 import _data_cores from './spacex/json/cores.json';
 import _data_launches from './spacex/json/launches.json';
 import _data_rockets from './spacex/json/rockets.json';
 
-// const data_cores = _data_cores.map(d =>({
-//   reuse: 
-// }))
-
+/* SET DES JEUX DE DONNEES */
 
 const data_launches = _data_launches.map(d =>({
   rocket_id: d.rocket_id,
@@ -23,13 +23,34 @@ const data_launches = _data_launches.map(d =>({
   success: d.success,
 }))
 
+/* Falcon 1 */
+const falcon1 = _data_launches.filter(d => d.rocket_id ==="5e9d0d95eda69955f709d1eb");
+const falcon1_filter = falcon1.map(d =>({
+  rocket: d.rocket_id,
+  success: d.success,
+}))
+
+/* Falcon 9 */
+const falcon9 = _data_launches.filter(d => d.rocket_id ==="5e9d0d95eda69973a809d1ec");
+const falcon9_filter = falcon9.map(d =>({
+  rocket: d.rocket_id,
+  success: d.success,
+}))
+
+/* Falcon Heavy */
+const falconHeavy = _data_launches.filter(d => d.rocket_id ==="5e9d0d95eda69974db09d1ed");
+const falconHeavy_filter = falconHeavy.map(d =>({
+  rocket: d.rocket_id,
+  success: d.success,
+}))
+
+console.log(falcon9_filter)
+
 const data_rockets = _data_rockets.map(d =>({
   name: d.name,
   height: d.height_mt,
   diameter: d.diameter_mt,
 }))
-
-console.log(data_rockets)
 
 const img = {
   viewBox: '0 0 92.08 61.99',
@@ -214,6 +235,8 @@ let total = launches.append("text")
     { nom: 'Nyon', population: 20533 },
     { nom: 'Vevey', population: 19827 },
   ]
+
+
 
   let getPieData = pie().value(d => d.population);
   let pieData = getPieData(LAUNCHES);
