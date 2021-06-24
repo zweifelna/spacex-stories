@@ -198,43 +198,162 @@ let total = launches.append("text")
 
 
   /***************************************************/
-  const LAUNCHES = [
+  /**** PIE 1*****/
+  
+  const LAUNCHES_FALCON1 = [
     { status: 'Success', number: falcon1.filter(d => d.success ===true).length },
     { status: 'Unsuccess', number: falcon1.filter(d => d.success ===false).length },
   ]
-  console.log(LAUNCHES)
 
-  let getPieData = pie().value(d => d.number);
-  let pieData = getPieData(LAUNCHES);
+  let getPie1Data = pie().value(d => d.number);
+  let pie1Data= getPie1Data(LAUNCHES_FALCON1);
   
-  const PIEWIDTH = WIDTH / 10
-  const PIEHEIGHT = HEIGHT / 10
+  const PIE1WIDTH = WIDTH / 10
+  const PIE1HEIGHT = HEIGHT / 10
   
   const svgPie = select('#pie1')
     .append('svg')
-    .attr('viewBox', `0 0 ${PIEWIDTH} ${PIEHEIGHT}`)
+    .attr('viewBox', `0 0 ${PIE1WIDTH} ${PIE1HEIGHT}`)
   
     const arcCreator = arc()
     .innerRadius(0)
-    .outerRadius(PIEHEIGHT / 2 - 10) // pour que tout le camembert soit visible
+    .outerRadius(PIE1HEIGHT / 2 - 10) // pour que tout le camembert soit visible
   
   const color = ({ data }) => {
     switch (data.status) {
-      case 'Success': return '#2a507d'
-      case 'Unsuccess': return 'white'
+      case 'Success': return 'white'
+      case 'Unsuccess': return '#2a507d'
       default: return 'black'
     }
   }
   
-  const group = svgPie.append('g')
-    .attr('transform', `translate(${PIEHEIGHT / 2}, ${PIEHEIGHT / 2})`)
+  const group1 = svgPie.append('g')
+    .attr('transform', `translate(${PIE1HEIGHT / 2}, ${PIE1HEIGHT / 2})`)
   
-  group.selectAll('path')
-    .data(pieData)
+    group1.selectAll('path')
+    .data(pie1Data)
     .enter()
     .append('path')
     .attr('d', arcCreator)
     .attr('fill', color)
+  
+  // un texte pour chaque tranche
+  group1.selectAll('text')
+    .data(pie1Data)
+    .enter()
+    .append('text')
+    // .centroid permet de trouver le centre de la tranche
+    .attr('transform', d => `translate(${arcCreator.centroid(d)})`)
+    .attr('text-anchor', 'middle')
+    .style('fill', 'black')
+    .style("font-size", "0.5em")
+    .text(d => d.data.number)
+  
+  // la légende
+  const legend = svgPie.append('g')
+    .attr('transform', `translate(${PIE1HEIGHT-10})`)
+  
+  const RECT_WIDTH = 20
+
+
+   /***************************************************/
+  /**** PIE 2 *****/
+  
+  const LAUNCHES_FALCON9 = [
+    { status: 'Success', number: falcon9.filter(d => d.success ===true).length },
+    { status: 'Unsuccess', number: falcon9.filter(d => d.success ===false).length },
+  ]
+
+  let getPie2Data = pie().value(d => d.number);
+  let pie2Data = getPie2Data(LAUNCHES_FALCON9);
+  
+  const PIE2WIDTH = WIDTH / 10
+  const PIE2HEIGHT = HEIGHT / 10
+  
+  const svgPie2 = select('#pie2')
+    .append('svg')
+    .attr('viewBox', `0 0 ${PIE2WIDTH} ${PIE2HEIGHT}`)
+  
+    const arcCreator2 = arc()
+    .innerRadius(0)
+    .outerRadius(PIE2HEIGHT / 2 - 10) // pour que tout le camembert soit visible
+  
+  const color2 = ({ data }) => {
+    switch (data.status) {
+      case 'Success': return 'white'
+      case 'Unsuccess': return '#2a507d'
+      default: return 'black'
+    }
+  }
+  
+  const group2 = svgPie2.append('g')
+    .attr('transform', `translate(${PIE2HEIGHT / 2}, ${PIE2HEIGHT / 2})`)
+  
+  group2.selectAll('path')
+    .data(pie2Data)
+    .enter()
+    .append('path')
+    .attr('d', arcCreator2)
+    .attr('fill', color2)
+  
+  // un texte pour chaque tranche
+  group2.selectAll('text')
+    .data(pie2Data)
+    .enter()
+    .append('text')
+    // .centroid permet de trouver le centre de la tranche
+    .attr('transform', d => `translate(${arcCreator.centroid(d)})`)
+    .attr('text-anchor', 'middle')
+    .style('fill', 'black')
+    .style("font-size", "0.5em")
+    .text(d => d.data.number)
+  
+  
+  // la légende
+  const legend2 = svgPie2.append('g')
+    .attr('transform', `translate(${PIE2HEIGHT-10})`)
+  
+  const RECT_WIDTH2 = 20
+
+ /***************************************************/
+  /**** PIE 3 *****/
+  
+  const LAUNCHES_FALCONHEAVY = [
+    { status: 'Success', number: falconHeavy.filter(d => d.success ===true).length },
+    { status: 'Unsuccess', number: falconHeavy.filter(d => d.success ===false).length },
+  ]
+
+  let getPie3Data = pie().value(d => d.number);
+  let pie3Data = getPie3Data(LAUNCHES_FALCONHEAVY);
+  
+  const PIE3WIDTH = WIDTH / 10
+  const PIE3HEIGHT = HEIGHT / 10
+  
+  const svgPie3 = select('#pie3')
+    .append('svg')
+    .attr('viewBox', `0 0 ${PIE3WIDTH} ${PIE3HEIGHT}`)
+  
+    const arcCreator3 = arc()
+    .innerRadius(0)
+    .outerRadius(PIE3HEIGHT / 2 - 10) // pour que tout le camembert soit visible
+  
+  const color3 = ({ data }) => {
+    switch (data.status) {
+      case 'Success': return 'white'
+      case 'Unsuccess': return '#2a507d'
+      default: return 'black'
+    }
+  }
+  
+  const group3 = svgPie3.append('g')
+    .attr('transform', `translate(${PIE3HEIGHT / 2}, ${PIE3HEIGHT / 2})`)
+  
+  group3.selectAll('path')
+    .data(pie3Data)
+    .enter()
+    .append('path')
+    .attr('d', arcCreator3)
+    .attr('fill', color3)
   
   // un texte pour chaque tranche
   // group.selectAll('text')
@@ -247,12 +366,7 @@ let total = launches.append("text")
   //   .text(d => d.data.nom)
   
   // la légende
-  const legend = svgPie.append('g')
-    .attr('transform', `translate(${PIEHEIGHT-10})`)
+  const legend3 = svgPie3.append('g')
+    .attr('transform', `translate(${PIE3HEIGHT-10})`)
   
-  const RECT_WIDTH = 20
-
-
-  /***********************************/
-
- 
+  const RECT_WIDTH3 = 20
