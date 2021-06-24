@@ -12,9 +12,6 @@ import {
   extent
 } from 'd3'
 
-// import jq from 'node-jq';
-
-
 import _data_cores from './spacex/json/cores.json';
 import _data_launches from './spacex/json/launches.json';
 import _data_rockets from './spacex/json/rockets.json';
@@ -27,6 +24,7 @@ const data_launches = _data_launches.map(d =>({
   success: d.success,
 }))
 
+/*** COLLECTION PAR ID DE FUSEES POUR LE PIE CHART***/
 /* Falcon 1 */
 const falcon1 = _data_launches.filter(d => d.rocket_id ==="5e9d0d95eda69955f709d1eb");
 const falcon1_filter = falcon1.map(d =>({
