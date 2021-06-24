@@ -5,7 +5,11 @@ import {
   max,
   interpolateNumber,
   arc,
-  pie
+  pie,
+  timeParse,
+  scaleTime,
+  line,
+  extent
 } from 'd3'
 
 // import jq from 'node-jq';
@@ -290,3 +294,38 @@ let total = launches.append("text")
     .attr('transform', `translate(${PIEHEIGHT-10})`)
   
   const RECT_WIDTH = 20
+
+
+  /***********************************/
+
+  const lineChart = select('#line')
+  .append('svg')
+  .attr('viewBox', `0 0 ${WIDTH} ${HEIGHT}`)
+  
+  // spécifier le format de date
+  const formatDate = timeParse('%Y-%m-%d')
+  const DATA = bitcoinPrices.map(d => ({ ...d, date: formatDate(d.date) })) // <===  DONNEES A MODIFIER AVEC LES BONNES !!
+  
+  // échelle de temps pour l'axe X
+  const scaleX = scaleTime()
+    .range([0, WIDTH])
+    .domain(extent(DATA, d => d.date))
+  
+  // échelle linéaire pour le prix de cloture
+  const scaleY = scaleLinear()
+    .range([HEIGHT, 0])
+    .domain(extent(DATA, d => d.close))
+
+  // la fonction d3.line() pour créer l'attribut "d"
+  const linePathCreator = line() 
+    // quelle échelle, quelle donnée pour l'axe X
+    .x(d => scaleX(d.date))
+    // quelle échelle, quelle donnée pour l'axe Y
+    .y(d => scaleY(d.close))
+
+  // ajouter une courbe au SVG
+  const line = lineChart.append('path')
+    // utiliser linePathCreator pour créer l'attribut "d"
+    .attr('d', linePathCreator(DATA))
+    .attr('fill', 'none')
+    .attr('stroke', 'red')
