@@ -7,9 +7,9 @@ import {
   interpolateNumber,
 } from 'd3'
 
-import _data_cores from '/spacex/json/cores.json';
-import _data_launches from '/spacex/json/launches.json';
-import _data_rockets from '/spacex/json/rockets.json';
+import _data_cores from './spacex/json/cores.json';
+import _data_launches from './spacex/json/launches.json';
+import _data_rockets from './spacex/json/rockets.json';
 
 // const data_cores = _data_cores.map(d =>({
 //   reuse: 
@@ -26,6 +26,8 @@ const data_rockets = _data_rockets.map(d =>({
   height: d.height_mt,
   diameter: d.diameter_mt,
 }))
+
+console.log(data_rockets)
 
 const img = {
   viewBox: '0 0 92.08 61.99',
@@ -46,7 +48,7 @@ const svg = select('#fusees')
   .attr('viewBox', `0 0 ${WIDTH} ${HEIGHT}`)
 
 const yScale = scaleLinear()
-  .domain([0, max(data_rockets, d => d.height_mt)])
+  .domain([0, max(data_rockets, d => d.height)])
   .range([BAR_HEIGHT, 0])
 
 
@@ -59,8 +61,8 @@ g.selectAll('rect')
   .append('rect')
   .attr('x', (d, i) =>  i * BAR_WIDTH)
   .attr('width', BAR_WIDTH - MARGIN)
-  .attr('y', d => yScale(d.height_mt))
-  .attr('height', d => BAR_HEIGHT - yScale(d.height_mt))
+  .attr('y', d => yScale(d.height))
+  .attr('height', d => BAR_HEIGHT - yScale(d.height))
   .attr('fill', 'steelblue')
 
 g.selectAll('text')
@@ -91,7 +93,7 @@ imagesG.selectAll('svg')
   .attr('viewBox', img.viewBox)
   .attr('width', BAR_WIDTH - MARGIN)
   .attr('x', (d, i) =>  i * BAR_WIDTH + BAR_WIDTH / 2)
-  .attr('y', d => yScale(d.height_mt) - HEIGHT / 2)
+  .attr('y', d => yScale(d.height) - HEIGHT / 2)
   .append('path')
     .attr('d', img.d)
     .attr('fill', 'steelblue')
