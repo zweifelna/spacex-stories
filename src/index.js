@@ -27,26 +27,12 @@ const data_launches = _data_launches.map(d =>({
 /*** COLLECTION PAR ID DE FUSEES POUR LE PIE CHART***/
 /* Falcon 1 */
 const falcon1 = _data_launches.filter(d => d.rocket_id ==="5e9d0d95eda69955f709d1eb");
-const falcon1_filter = falcon1.map(d =>({
-  rocket: d.rocket_id,
-  success: d.success,
-}))
 
 /* Falcon 9 */
 const falcon9 = _data_launches.filter(d => d.rocket_id ==="5e9d0d95eda69973a809d1ec");
-const falcon9_filter = falcon9.map(d =>({
-  rocket: d.rocket_id,
-  success: d.success,
-}))
 
 /* Falcon Heavy */
 const falconHeavy = _data_launches.filter(d => d.rocket_id ==="5e9d0d95eda69974db09d1ed");
-const falconHeavy_filter = falconHeavy.map(d =>({
-  rocket: d.rocket_id,
-  success: d.success,
-}))
-
-console.log(falcon9_filter)
 
 const data_rockets = _data_rockets.map(d =>({
   name: d.name,
@@ -54,7 +40,6 @@ const data_rockets = _data_rockets.map(d =>({
   diameter: d.diameter_mt,
 }))
 
-console.log(data_rockets)
 
 const WIDTH = 1000
 const HEIGHT = 500
@@ -213,21 +198,14 @@ let total = launches.append("text")
 
 
   /***************************************************/
-  
   const LAUNCHES = [
-    { nom: 'Lausanne', population: 138905 },
-    { nom: 'Yverdon-les-Bains', population: 30143 },
-    { nom: 'Montreux', population: 26574 },
-    { nom: 'Renens', population: 21036 },
-    { nom: 'Nyon', population: 20533 },
-    { nom: 'Vevey', population: 19827 },
+    { status: 'Success', number: falcon1.filter(d => d.success ===true).length },
+    { status: 'Unsuccess', number: falcon1.filter(d => d.success ===false).length },
   ]
+  console.log(LAUNCHES)
 
-
-
-  let getPieData = pie().value(d => d.population);
+  let getPieData = pie().value(d => d.number);
   let pieData = getPieData(LAUNCHES);
-  
   
   const PIEWIDTH = WIDTH / 10
   const PIEHEIGHT = HEIGHT / 10
@@ -241,13 +219,9 @@ let total = launches.append("text")
     .outerRadius(PIEHEIGHT / 2 - 10) // pour que tout le camembert soit visible
   
   const color = ({ data }) => {
-    switch (data.nom) {
-      case 'Lausanne': return 'gold'
-      case 'Yverdon-les-Bains': return 'limegreen'
-      case 'Montreux': return 'violet'
-      case 'Renens': return 'indianred'
-      case 'Nyon': return 'pink'
-      case 'Vevey': return 'indigo'
+    switch (data.status) {
+      case 'Success': return 'limegreen'
+      case 'Unsuccess': return 'red'
       default: return 'black'
     }
   }
@@ -281,34 +255,34 @@ let total = launches.append("text")
 
   /***********************************/
 
-  const lineChart = select('#line')
-  .append('svg')
-  .attr('viewBox', `0 0 ${WIDTH} ${HEIGHT}`)
+  // const lineChart = select('#line')
+  // .append('svg')
+  // .attr('viewBox', `0 0 ${WIDTH} ${HEIGHT}`)
   
-  // spécifier le format de date
-  const formatDate = timeParse('%Y-%m-%d')
-  const DATA = bitcoinPrices.map(d => ({ ...d, date: formatDate(d.date) })) // <===  DONNEES A MODIFIER AVEC LES BONNES !!
+  // // spécifier le format de date
+  // const formatDate = timeParse('%Y-%m-%d')
+  // const DATA = bitcoinPrices.map(d => ({ ...d, date: formatDate(d.date) })) // <===  DONNEES A MODIFIER AVEC LES BONNES !!
   
-  // échelle de temps pour l'axe X
-  const scaleX = scaleTime()
-    .range([0, WIDTH])
-    .domain(extent(DATA, d => d.date))
+  // // échelle de temps pour l'axe X
+  // const scaleX = scaleTime()
+  //   .range([0, WIDTH])
+  //   .domain(extent(DATA, d => d.date))
   
-  // échelle linéaire pour le prix de cloture
-  const scaleY = scaleLinear()
-    .range([HEIGHT, 0])
-    .domain(extent(DATA, d => d.close))
+  // // échelle linéaire pour le prix de cloture
+  // const scaleY = scaleLinear()
+  //   .range([HEIGHT, 0])
+  //   .domain(extent(DATA, d => d.close))
 
-  // la fonction d3.line() pour créer l'attribut "d"
-  const linePathCreator = line() 
-    // quelle échelle, quelle donnée pour l'axe X
-    .x(d => scaleX(d.date))
-    // quelle échelle, quelle donnée pour l'axe Y
-    .y(d => scaleY(d.close))
+  // // la fonction d3.line() pour créer l'attribut "d"
+  // const linePathCreator = line() 
+  //   // quelle échelle, quelle donnée pour l'axe X
+  //   .x(d => scaleX(d.date))
+  //   // quelle échelle, quelle donnée pour l'axe Y
+  //   .y(d => scaleY(d.close))
 
-  // ajouter une courbe au SVG
-  const courb = lineChart.append('path')
-    // utiliser linePathCreator pour créer l'attribut "d"
-    .attr('d', linePathCreator(DATA))
-    .attr('fill', 'none')
-    .attr('stroke', 'red')
+  // // ajouter une courbe au SVG
+  // const courb = lineChart.append('path')
+  //   // utiliser linePathCreator pour créer l'attribut "d"
+  //   .attr('d', linePathCreator(DATA))
+  //   .attr('fill', 'none')
+  //   .attr('stroke', 'red')
