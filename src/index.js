@@ -17,10 +17,11 @@ import _data_rockets from './spacex/json/rockets.json';
 // }))
 
 
-// const data_cores = _data_cores.map(d =>({
-//   reuse: 
-// }))
-
+const data_launches = _data_launches.map(d =>({
+  rocket_id: d.rocket_id,
+  date: d.date,
+  success: d.success,
+}))
 
 const data_rockets = _data_rockets.map(d =>({
   name: d.name,
@@ -52,7 +53,6 @@ const yScale = scaleLinear()
   .domain([0, max(data_rockets, d => d.height)])
   .range([BAR_HEIGHT, 0])
 
-
 const g = svg.append('g')
   .attr('transform', `translate(${MARGIN_LEFT}, ${MARGIN_TOP})`)
 
@@ -77,7 +77,7 @@ g.selectAll('text')
   .attr("font-family", "Arial")
 
 const axisY = axisLeft().scale(yScale)
-  .tickFormat(d => `${d / 1000}k`)
+  .tickFormat(d => `${d}m`)
   .ticks(5)
 
 svg.append('g')
@@ -161,14 +161,13 @@ count.transition()
   .tween("text", function() {
      let selection = select(this);    // selection of node being transitioned
      let start = 0; // start value prior to transition
-     let end = 4;                     // specified end value
+     let end = data_rockets.length;                     // specified end value
      let interpolator = interpolateNumber(start,end); // d3 interpolator
 
      return function(t) { selection.text(Math.round(interpolator(t))); };  // return value
      
   })
   .duration(2500);
-
 
 
 const launches = select("#numbers")
@@ -196,7 +195,7 @@ let total = launches.append("text")
   .tween("text", function() {
      let selection = select(this);    // selection of node being transitioned
      let start = 0; // start value prior to transition
-     let end = 116;                     // specified end value
+     let end = data_launches.length;                     // specified end value
      let interpolator = interpolateNumber(start,end); // d3 interpolator
 
      return function(t) { selection.text(Math.round(interpolator(t))); };  // return value
