@@ -17,6 +17,10 @@ body{
     align-content: center;
 }
 
+#logo > svg{
+    margin-left: 4rem;
+}
+
 text{
     fill: white;
 }
@@ -43,4 +47,11 @@ text{
 #subtitle{
     font-size: 3em;
     font-style: italic;
+    margin-bottom: 4rem;
+    margin-left: 2rem;
+}
+
+#pies{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }

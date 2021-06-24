@@ -213,15 +213,20 @@ let total = launches.append("text")
 
 
   /***************************************************/
-  
   const LAUNCHES = [
-    { nom: 'Lausanne', population: 138905 },
-    { nom: 'Yverdon-les-Bains', population: 30143 },
-    { nom: 'Montreux', population: 26574 },
-    { nom: 'Renens', population: 21036 },
-    { nom: 'Nyon', population: 20533 },
-    { nom: 'Vevey', population: 19827 },
+    { status: 'Success', number: falcon1.filter(d => d.success == 1).length },
+    { status: 'Unsuccess', number: falcon1.filter(d => d.success == 0).length },
   ]
+
+  const LAUNCHES2 = [
+    { status: 'Success', number: falcon1.filter(d => d.success == 1).length },
+    { status: 'Unsuccess', number: falcon1.filter(d => d.success == 0).length },
+  ]
+
+  let test = falcon1.filter(d => d.success == 0).length;
+
+  console.log(LAUNCHES);
+    
 
 
 
@@ -232,7 +237,7 @@ let total = launches.append("text")
   const PIEWIDTH = WIDTH / 10
   const PIEHEIGHT = HEIGHT / 10
   
-  const svgPie = select('#pies')
+  const svgPie = select('#pie1')
     .append('svg')
     .attr('viewBox', `0 0 ${PIEWIDTH} ${PIEHEIGHT}`)
   
@@ -281,34 +286,4 @@ let total = launches.append("text")
 
   /***********************************/
 
-  const lineChart = select('#line')
-  .append('svg')
-  .attr('viewBox', `0 0 ${WIDTH} ${HEIGHT}`)
-  
-  // spécifier le format de date
-  const formatDate = timeParse('%Y-%m-%d')
-  const DATA = bitcoinPrices.map(d => ({ ...d, date: formatDate(d.date) })) // <===  DONNEES A MODIFIER AVEC LES BONNES !!
-  
-  // échelle de temps pour l'axe X
-  const scaleX = scaleTime()
-    .range([0, WIDTH])
-    .domain(extent(DATA, d => d.date))
-  
-  // échelle linéaire pour le prix de cloture
-  const scaleY = scaleLinear()
-    .range([HEIGHT, 0])
-    .domain(extent(DATA, d => d.close))
-
-  // la fonction d3.line() pour créer l'attribut "d"
-  const linePathCreator = line() 
-    // quelle échelle, quelle donnée pour l'axe X
-    .x(d => scaleX(d.date))
-    // quelle échelle, quelle donnée pour l'axe Y
-    .y(d => scaleY(d.close))
-
-  // ajouter une courbe au SVG
-  const courb = lineChart.append('path')
-    // utiliser linePathCreator pour créer l'attribut "d"
-    .attr('d', linePathCreator(DATA))
-    .attr('fill', 'none')
-    .attr('stroke', 'red')
+ 
