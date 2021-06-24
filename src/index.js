@@ -35,11 +35,6 @@ const data_rockets = _data_rockets.map(d =>({
 
 console.log(data_rockets)
 
-const img = {
-  viewBox: '0 0 92.08 61.99',
-  d: 'M68.5.5H23.58L.5 35.38v26.11h91.08V35.38L68.5.5z',
-}
-
 const WIDTH = 1000
 const HEIGHT = 500
 const MARGIN = 5
@@ -90,18 +85,6 @@ svg.append('g')
 
 const imagesG = g.append('g')
   .attr('transform', `translate(${-BAR_WIDTH / 2}, -15)`)
-
-imagesG.selectAll('svg')
-  .data(data_rockets)
-  .enter()
-  .append('svg')
-  .attr('viewBox', img.viewBox)
-  .attr('width', BAR_WIDTH - MARGIN)
-  .attr('x', (d, i) =>  i * BAR_WIDTH + BAR_WIDTH / 2)
-  .attr('y', d => yScale(d.height) - HEIGHT / 2)
-  .append('path')
-    .attr('d', img.d)
-    .attr('fill', 'steelblue')
 
 
 /******************************************/
@@ -226,7 +209,7 @@ let total = launches.append("text")
   const PIEWIDTH = WIDTH / 10
   const PIEHEIGHT = HEIGHT / 10
   
-  const svgPie = select('body')
+  const svgPie = select('#pies')
     .append('svg')
     .attr('viewBox', `0 0 ${PIEWIDTH} ${PIEHEIGHT}`)
   
@@ -301,7 +284,7 @@ let total = launches.append("text")
     .y(d => scaleY(d.close))
 
   // ajouter une courbe au SVG
-  const line = lineChart.append('path')
+  const courb = lineChart.append('path')
     // utiliser linePathCreator pour créer l'attribut "d"
     .attr('d', linePathCreator(DATA))
     .attr('fill', 'none')
