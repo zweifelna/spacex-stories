@@ -27,26 +27,12 @@ const data_launches = _data_launches.map(d =>({
 /*** COLLECTION PAR ID DE FUSEES POUR LE PIE CHART***/
 /* Falcon 1 */
 const falcon1 = _data_launches.filter(d => d.rocket_id ==="5e9d0d95eda69955f709d1eb");
-const falcon1_filter = falcon1.map(d =>({
-  rocket: d.rocket_id,
-  success: d.success,
-}))
 
 /* Falcon 9 */
 const falcon9 = _data_launches.filter(d => d.rocket_id ==="5e9d0d95eda69973a809d1ec");
-const falcon9_filter = falcon9.map(d =>({
-  rocket: d.rocket_id,
-  success: d.success,
-}))
 
 /* Falcon Heavy */
 const falconHeavy = _data_launches.filter(d => d.rocket_id ==="5e9d0d95eda69974db09d1ed");
-const falconHeavy_filter = falconHeavy.map(d =>({
-  rocket: d.rocket_id,
-  success: d.success,
-}))
-
-console.log(falcon9_filter)
 
 const data_rockets = _data_rockets.map(d =>({
   name: d.name,
@@ -54,7 +40,6 @@ const data_rockets = _data_rockets.map(d =>({
   diameter: d.diameter_mt,
 }))
 
-console.log(data_rockets)
 
 const WIDTH = 1000
 const HEIGHT = 500
@@ -214,25 +199,13 @@ let total = launches.append("text")
 
   /***************************************************/
   const LAUNCHES = [
-    { status: 'Success', number: falcon1.filter(d => d.success == 1).length },
-    { status: 'Unsuccess', number: falcon1.filter(d => d.success == 0).length },
+    { status: 'Success', number: falcon1.filter(d => d.success ===true).length },
+    { status: 'Unsuccess', number: falcon1.filter(d => d.success ===false).length },
   ]
+  console.log(LAUNCHES)
 
-  const LAUNCHES2 = [
-    { status: 'Success', number: falcon1.filter(d => d.success == 1).length },
-    { status: 'Unsuccess', number: falcon1.filter(d => d.success == 0).length },
-  ]
-
-  let test = falcon1.filter(d => d.success == 0).length;
-
-  console.log(LAUNCHES);
-    
-
-
-
-  let getPieData = pie().value(d => d.population);
+  let getPieData = pie().value(d => d.number);
   let pieData = getPieData(LAUNCHES);
-  
   
   const PIEWIDTH = WIDTH / 10
   const PIEHEIGHT = HEIGHT / 10
@@ -246,13 +219,9 @@ let total = launches.append("text")
     .outerRadius(PIEHEIGHT / 2 - 10) // pour que tout le camembert soit visible
   
   const color = ({ data }) => {
-    switch (data.nom) {
-      case 'Lausanne': return 'gold'
-      case 'Yverdon-les-Bains': return 'limegreen'
-      case 'Montreux': return 'violet'
-      case 'Renens': return 'indianred'
-      case 'Nyon': return 'pink'
-      case 'Vevey': return 'indigo'
+    switch (data.status) {
+      case 'Success': return '#2a507d'
+      case 'Unsuccess': return 'white'
       default: return 'black'
     }
   }
