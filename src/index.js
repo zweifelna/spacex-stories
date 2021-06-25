@@ -9,7 +9,8 @@ import {
   timeParse,
   scaleTime,
   line,
-  extent
+  extent,
+  event
 } from 'd3'
 
 import _data_cores from './spacex/json/cores.json';
@@ -209,7 +210,7 @@ let total = launches.append("text")
   let pie1Data= getPie1Data(LAUNCHES_FALCON1);
   
   const PIE1WIDTH = WIDTH / 10
-  const PIE1HEIGHT = HEIGHT / 10
+  const PIE1HEIGHT = HEIGHT / 5
   
   const svgPie = select('#pie1')
     .append('svg')
@@ -268,7 +269,7 @@ let total = launches.append("text")
   let pie2Data = getPie2Data(LAUNCHES_FALCON9);
   
   const PIE2WIDTH = WIDTH / 10
-  const PIE2HEIGHT = HEIGHT / 10
+  const PIE2HEIGHT = HEIGHT / 5
   
   const svgPie2 = select('#pie2')
     .append('svg')
@@ -327,7 +328,7 @@ let total = launches.append("text")
   let pie3Data = getPie3Data(LAUNCHES_FALCONHEAVY);
   
   const PIE3WIDTH = WIDTH / 10
-  const PIE3HEIGHT = HEIGHT / 10
+  const PIE3HEIGHT = HEIGHT / 5
   
   const svgPie3 = select('#pie3')
     .append('svg')
@@ -345,6 +346,10 @@ let total = launches.append("text")
     }
   }
   
+  var div = select("body").append("div")
+     .attr("class", "tooltip-donut")
+     .style("opacity", 0);
+  
   const group3 = svgPie3.append('g')
     .attr('transform', `translate(${PIE3HEIGHT / 2}, ${PIE3HEIGHT / 2})`)
   
@@ -356,14 +361,17 @@ let total = launches.append("text")
     .attr('fill', color3)
   
   // un texte pour chaque tranche
-  // group.selectAll('text')
-  //   .data(pieData)
-  //   .enter()
-  //   .append('text')
-  //   // .centroid permet de trouver le centre de la tranche
-  //   .attr('transform', d => `translate(${arcCreator.centroid(d)})`)
-  //   .attr('text-anchor', 'middle')
-  //   .text(d => d.data.nom)
+  group3.selectAll('text')
+    .data(pie3Data)
+    .enter()
+    .append('text')
+    // .centroid permet de trouver le centre de la tranche
+    .attr('transform', d => `translate(${arcCreator.centroid(d)})`)
+    .attr('text-anchor', 'middle')
+    .style('fill', 'black')
+    .style("font-size", "0.5em")
+    .text(d => d.data.number)
+  
   
   // la légende
   const legend3 = svgPie3.append('g')
