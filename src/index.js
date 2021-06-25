@@ -90,8 +90,7 @@ svg.append('g')
   .attr('transform', `translate(${MARGIN_LEFT - 3}, ${MARGIN_TOP})`)
   .call(axisY)
 
-const imagesG = g.append('g')
-  .attr('transform', `translate(${-BAR_WIDTH / 2}, -15)`)
+
 
 
 /******************************************/
@@ -238,23 +237,6 @@ let total = launches.append("text")
     .attr('d', arcCreator)
     .attr('fill', color)
   
-  // un texte pour chaque tranche
-  group1.selectAll('text')
-    .data(pie1Data)
-    .enter()
-    .append('text')
-    // .centroid permet de trouver le centre de la tranche
-    .attr('transform', d => `translate(${arcCreator.centroid(d)})`)
-    .attr('text-anchor', 'middle')
-    .style('fill', 'black')
-    .style("font-size", "0.5em")
-    .text(d => d.data.number)
-  
-  // la légende
-  const legend = svgPie.append('g')
-    .attr('transform', `translate(${PIE1HEIGHT-10})`)
-  
-  const RECT_WIDTH = 20
 
 
    /***************************************************/
@@ -297,24 +279,6 @@ let total = launches.append("text")
     .attr('d', arcCreator2)
     .attr('fill', color2)
   
-  // un texte pour chaque tranche
-  group2.selectAll('text')
-    .data(pie2Data)
-    .enter()
-    .append('text')
-    // .centroid permet de trouver le centre de la tranche
-    .attr('transform', d => `translate(${arcCreator.centroid(d)})`)
-    .attr('text-anchor', 'middle')
-    .style('fill', 'black')
-    .style("font-size", "0.5em")
-    .text(d => d.data.number)
-  
-  
-  // la légende
-  const legend2 = svgPie2.append('g')
-    .attr('transform', `translate(${PIE2HEIGHT-10})`)
-  
-  const RECT_WIDTH2 = 20
 
  /***************************************************/
   /**** PIE 3 *****/
@@ -360,21 +324,5 @@ let total = launches.append("text")
     .attr('d', arcCreator3)
     .attr('fill', color3)
   
-  // un texte pour chaque tranche
-  group3.selectAll('text')
-    .data(pie3Data)
-    .enter()
-    .append('text')
-    // .centroid permet de trouver le centre de la tranche
-    .attr('transform', d => `translate(${arcCreator.centroid(d)})`)
-    .attr('text-anchor', 'middle')
-    .style('fill', 'black')
-    .style("font-size", "0.5em")
-    .text(d => d.data.number)
+
   
-  
-  // la légende
-  const legend3 = svgPie3.append('g')
-    .attr('transform', `translate(${PIE3HEIGHT-10})`)
-  
-  const RECT_WIDTH3 = 20
