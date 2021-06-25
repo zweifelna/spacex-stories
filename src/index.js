@@ -140,7 +140,7 @@ let date = creationDate.append("text")
   .attr("text-anchor", "middle")
   .attr("font-size", "2em")
   .attr("font-family", "Arial")
-  .text("Création de SpaceX");
+  .text("SpaceX creation");
   
   date.transition()
   .tween("text", function() {
@@ -173,7 +173,7 @@ let label = rockets.append("text")
   .attr("text-anchor", "middle")
   .attr("font-size", "2em")
   .attr("font-family", "Arial")
-  .text("Modèles de fusées");
+  .text("Rocket models");
   
 count.transition()
   .tween("text", function() {
@@ -207,7 +207,7 @@ let total = launches.append("text")
   .attr("text-anchor", "middle")
   .attr("font-size", "2em")
   .attr("font-family", "Arial")
-  .text("Décollages réussis");
+  .text("Successful launches");
   
   total.transition()
   .tween("text", function() {
