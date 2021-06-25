@@ -41,7 +41,6 @@ const data_rockets = _data_rockets.map(d =>({
   diameter: d.diameter_mt,
 }))
 
-
 const WIDTH = 1000
 const HEIGHT = 500
 const MARGIN = 5
@@ -50,6 +49,32 @@ const MARGIN_BOTTOM = 50
 const MARGIN_TOP = 50
 const BAR_HEIGHT = HEIGHT - MARGIN_TOP - MARGIN_BOTTOM
 const BAR_WIDTH = (WIDTH - MARGIN_LEFT) / data_rockets.length
+
+// ----------------
+  // Créé un tooltip pour afficher les informations au passage de la souris
+  // ----------------
+
+    // let tooltip = select('#fusees')
+    // .data(data_rockets)
+    // .style('opacity', 0);
+    
+    // const mouseover = (event, d) => {
+    //   tooltip.style("opacity", 1);
+    // };
+
+    // const mouseleave = (event, d) => {
+    //   // tooltip.style('opacity', 0);
+    // }
+
+    // const mousemove = (event, d) => {
+    //   const text = select('#fusees');
+    //   text.text(`Sales were ${d.name}`);
+    //   const [x, y] = d3.pointer(event);
+    //   tooltip
+
+    //   .attr('transform', `translate(${x}, ${y})`);
+
+    // };
 
 const svg = select('#fusees')
   .append('svg')
@@ -81,7 +106,7 @@ g.selectAll('text')
   .attr('y', BAR_HEIGHT + MARGIN_BOTTOM / 2)
   .attr('text-anchor', 'middle')
   .attr("font-family", "Arial")
-
+  
 const axisY = axisLeft().scale(yScale)
   .tickFormat(d => `${d}m`)
   .ticks(5)
@@ -93,8 +118,8 @@ svg.append('g')
 
 
 
-/******************************************/
 
+/******************************************/
 
 const creationDate = select("#numbers")
   .append("svg");
@@ -195,6 +220,7 @@ let total = launches.append("text")
      
   })
   .duration(2500);
+
 
 
   /***************************************************/
