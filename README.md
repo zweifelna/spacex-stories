@@ -4,7 +4,9 @@
 
 Terminé
 
-https://spacex-stories.surge.sh/
+**Accessible sur:** https://spacex-stories.surge.sh/
+
+**repo GIT :** https://github.com/zweifelna/spacex-stories
 
 **Membres du groupe** 
 
